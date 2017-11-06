@@ -1,0 +1,59 @@
+<ion-header no-border>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title  *ngIf="ad">{{ ad.ad.name}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: #f7f7f7" [fullscreen]="true">
+<div style="background-color: #f4f4f4" *ngIf="ad">
+  <div [ngStyle]= "{ 'background-image' : 'url(' + base_url  + '/assets/uploads/' + ad.ad.image+ ')' , 'background-size': '100%', 'height': '300px' , 'background-color' : '#444', 'background-repeat' : 'none'}">
+      <span id="ad_details" padding>
+          <h3>{{ ad.ad.name}}</h3>
+          <p style="color: #fa812f">₦{{ ad.ad.price }}</p>
+          <p>{{ ad.ad.category_name}}</p>
+      </span>  
+  </div> 
+
+
+
+<!-- 
+   <ion-list *ngIf="ad">
+        <ion-item>
+            <img style="background-color:#f7f7fc"  src="{{ base_url }}/assets/uploads/{{ ad.ad.image }}">
+          <h3>{{ ad.ad.name}}</h3>
+          <p style="color: #fa812f">₦{{ ad.ad.price }}</p>
+          <p>{{ ad.ad.category_name}}</p>
+        </ion-item>
+  </ion-list> -->
+
+</div>
+<div  *ngIf="ad" style="margin-top: 35%">
+
+    <div padding>
+      <button ion-button icon-left block round color="light_green" *ngIf="!showNumber" (click)="showPhone()" ><ion-icon name="md-call"></ion-icon> Show phone</button>
+      <button ion-button icon-left block round color="light_green" *ngIf="showNumber" ><ion-icon name="md-call"></ion-icon>  {{ ad.seller.phone }}</button>
+    </div>
+  <ion-card>
+
+
+  <ion-card-content>
+<p style="color: #444">{{ ad.ad.description}}</p>
+  </ion-card-content>
+
+</ion-card>
+</div>
+   <ion-list *ngIf="ad" padding >
+        <ion-item style="box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);">
+          <ion-icon name="md-contact" item-start></ion-icon>
+          <h3>{{ ad.seller.name}}</h3>
+          <p style="color: #fa812f">{{ ad.seller.location }}</p>
+        </ion-item>
+  </ion-list> 
+
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-header no-border>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Market</ion-title>
+  </ion-navbar>
+<ion-toolbar>
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)">
+    <ion-segment-button value="{{ idx + 1}}" *ngFor="let item of cats; let idx = index">
+      {{ item.name }}
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+</ion-header>
+
+
+<ion-content  >
+
+ <ion-slides #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+    <ion-slide *ngFor="let slide of cats">
+      <h1>{{ slide.name }}</h1>
+    </ion-slide>
+  </ion-slides>
+
+<div style="background-color: #f4f4f4" >
+  
+   <ion-list *ngIf="products">
+        <ion-item  *ngFor="let item of products"  (click)="viewProduct(item.id)">
+          <ion-thumbnail item-start>
+            <img style="background-color:#f7f7fc"  src="{{ base_url }}/assets/uploads/{{ item.image }}">
+          </ion-thumbnail>
+          <h3>{{ item.name}}</h3>
+          <p style="color: #fa812f">₦{{ item.price }}</p>
+          <p>{{ item.category_name}}</p>
+        </ion-item>
+  </ion-list>
+  
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="total > page">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+
+
+</div>
+
+</ion-content>
+<style>
+  ion-scroll {
+    width: 100%;
+    height: 100%;
+  }
+</style>

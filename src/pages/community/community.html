@@ -1,0 +1,99 @@
+<ion-header>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Agrifo farmers forum</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  >
+<div style="background-color: #f4f4f4" >
+
+    <ion-list style="background-color: #FFF">
+       
+
+  <ion-item *ngFor="let topic of topics" style=" padding-top: 0px;  padding-bottom: 0px"  (click)="viewTopic(topic.id)">
+   <span class="name_badge" item-start id="cl{{ topic.cl_no }}">
+          {{ topic.by_username | slice:0:1 }}
+    </span>
+
+    <p style="margin-top: 3%; margin-bottom: 3%">by <span style="margin-right: 3%; color: #444">{{ topic.by_username }}</span>  <small style="margin-right: 5%">{{ topic.date_created}}</small> 
+    <div text-wrap>
+      <h3 style="font-weight: bold; color: #111; margin-bottom: 3%">{{ topic.title }}</h3>
+  </div>
+    <div >
+            <p><ion-icon name="ios-chatbubbles-outline"></ion-icon>
+            Replies ({{ topic.replies }}) - <small>last reply: {{ topic.last_answered }}</small></p>
+    </div>
+  </ion-item>
+
+
+<!--        <h3 style="font-weight: bold; font-size: 120%; color: #009688" (click)="viewTopic(topic.id)">{{ topic.title }}</h3>
+
+     <ion-row>
+      <ion-col style="background-color: ">
+    <span class="name_badge" item-start id="cl{{ topic.cl_no }}">
+          {{ topic.by_username | slice:0:1 }}
+    </span>
+
+        <p style="color: #8BC34A"><ion-icon name="md-person"></ion-icon> <span style="margin-right: 3%; color: #444">{{ topic.by_username}}</span> <ion-icon name="ios-clock-outline"></ion-icon> <small style="margin-right: 5%">{{ topic.date_created}}</small> 
+        
+        <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+        
+        <span style="margin-right: 5%">{{ topic.replies}}</span>
+        
+        <ion-icon name="ios-eye-outline"></ion-icon>
+         
+          <span *ngIf="topic.views">{{ topic.views}}</span>
+          <span *ngIf="!topic.views">0</span></p>
+      </ion-col>
+    </ion-row>
+
+
+    <p>{{ topic.body | slice:0:80}}...</p>
+    <p><small>{{ topic.date_created }}</small></p>
+ -->
+    </ion-list>
+
+<!--   <ion-card *ngFor="let topic of topics" style="background-color: #FFF">
+    <ion-card-header>
+      <h3 style="font-weight: bold; font-size: 120%; color: #001279" (click)="viewTopic(topic.id)">{{ topic.title }}</h3>
+    </ion-card-header>
+    <ion-card-content>
+    <p>{{ topic.body | slice:0:80}}...</p>
+    <p><small>{{ topic.date_created }}</small></p>
+
+    </ion-card-content>
+     <ion-row>
+      <ion-col>
+      <ion-card-header style="background-color: #f7f7f7">
+
+        <p><ion-icon name="md-person"></ion-icon> <span style="margin-right: 3%; color: #444">{{ topic.by_username}}</span> <ion-icon name="ios-clock-outline"></ion-icon> <small style="margin-right: 5%">{{ topic.date_created}}</small> 
+        
+        <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+        
+        <span style="margin-right: 5%">{{ topic.replies}}</span>
+        
+        <ion-icon name="ios-eye-outline"></ion-icon>
+         
+          <span *ngIf="topic.views">{{ topic.views}}</span>
+          <span *ngIf="!topic.views">0</span></p>
+
+      </ion-card-header>
+
+      </ion-col>
+    </ion-row>
+  </ion-card>
+ -->
+
+</div>
+
+
+<ion-fab  right bottom>
+    <button ion-fab mini color="light_green"  (click)="createTopic()" ><ion-icon name="md-create"></ion-icon></button>
+ </ion-fab>
+</ion-content>

@@ -1,0 +1,38 @@
+
+page-home {
+  .home {
+    background: #56CA96;
+  }
+  .menu_button{
+  	display: inline-block;
+  	height: 120px;
+  	box-shadow: none;
+    border-bottom: #fff solid 5px;
+  }
+
+  .menu_div{
+  	height: 25vh;
+    margin-bottom: 5%;
+
+  }
+h3{
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+  
+}
+  p{
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+
+  }
+  .menu_icon{
+  	font-size: 6em;
+  }
+
+  .clear_bg{
+  	     background-color :  rgba(255,255,255,0.4) !important;
+
+  }
+}

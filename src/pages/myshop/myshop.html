@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>My Shop</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  >
+<div style="background-color: #f4f4f4" >
+      <ion-item-divider color="light" text-center>Sell your items on the market</ion-item-divider>
+
+   <ion-list *ngIf="products">
+        <ion-item  *ngFor="let item of products; let i=index">
+          <ion-thumbnail item-start>
+            <img style="background-color:#f7f7fc"  src="{{ base_url }}/assets/uploads/{{ item.image }}">
+          </ion-thumbnail>
+          <h3>{{ item.name}}</h3>
+          <p style="color: #fa812f">₦{{ item.price }}</p>
+          <p>{{ item.category_name}}</p>
+          <button ion-button color="dark" clear icon-only item-end (click)="hideProduct(item.id, i)" [disabled]="item.hide == 1">
+            Hide
+          </button>
+        </ion-item>
+  </ion-list>
+  
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="total > page">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+
+
+</div>
+
+
+<ion-fab  right bottom>
+    <button ion-fab mini color="light_green"  (click)="addProduct()" ><ion-icon name="md-add"></ion-icon></button>
+ </ion-fab>
+</ion-content>
+<style>
+  ion-scroll {
+    width: 100%;
+    height: 100%;
+  }
+</style>

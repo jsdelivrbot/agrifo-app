@@ -1,0 +1,52 @@
+<ion-header no-border>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Market</ion-title>
+    <ion-buttons end>
+      <button ion-button clear large (click)="openFilter()">
+        <ion-icon name="md-options"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-searchbar (ionInput)="searchItems($event)"   [showCancelButton]="true"  (ionCancel)="onCancel($event)" placeholder="Type your search here"></ion-searchbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<div style="background-color: #f4f4f4" >
+  
+   <ion-list *ngIf="products">
+        <ion-item  *ngFor="let item of products"  (click)="viewProduct(item.id)">
+          <ion-thumbnail item-start>
+            <img style="background-color:#f7f7fc"  src="{{ base_url }}/assets/uploads/{{ item.image }}">
+          </ion-thumbnail>
+          <h3>{{ item.name}}</h3>
+          <p style="color: #fa812f">₦{{ item.price }}</p>
+          <p>{{ item.category_name}}</p>
+        </ion-item>
+  </ion-list>
+  
+<ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="total > page">
+   <ion-infinite-scroll-content></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+
+<div text-center *ngIf="empty">
+  <h3>No products yet</h3>
+</div>
+
+</div>
+
+<ion-list style="opacity: 0">
+  <ion-item>
+    <ion-label>Filter by category</ion-label>
+    <ion-select [(ngModel)]="category" (ngModelChange)='filter(category)'>
+      <ion-option value="{{ category.id }}"   *ngFor="let category of categories" >{{ category.name }}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+</ion-content>

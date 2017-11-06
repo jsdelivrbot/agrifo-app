@@ -1,0 +1,36 @@
+<ion-header no-border>
+
+  <ion-navbar  color="white">
+    <button ion-button menuToggle color="dark" >
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  <button ion-button  color="dark" clear large (click)="presentActionSheet()">
+    <ion-icon name="image"></ion-icon>
+  </button>
+    <ion-buttons end>
+      <button ion-button clear large (click)="reply(data)">
+         Post Reply
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+<ion-list no-lines>
+  <ion-item>
+    <ion-textarea placeholder="Reply Post" [(ngModel)]="data.body" rows="80" required></ion-textarea>
+  </ion-item>
+</ion-list>
+<ion-list no-lines text-center>
+  <ion-item>
+  <img src="{{pathForImage(lastImage)}}" style="width: 100px; height: 100px" [hidden]="lastImage === null">
+  </ion-item>
+</ion-list>
+
+
+
+
+</ion-content>

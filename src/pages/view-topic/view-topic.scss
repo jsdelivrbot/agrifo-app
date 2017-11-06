@@ -1,0 +1,50 @@
+page-view-topic {
+	.pgbkgrnd{
+	background-color: #fff;
+	}
+
+	.fabButton {
+     position: relative; 
+    }
+   .fabButton button {
+     float: left;  
+    }
+   .fabButton ion-fab-list {
+     position: relative; 
+    }
+
+    .name_badge{
+    color: #fff;
+    margin-right: 2%;
+    padding: 6px;
+    line-height: 4px;
+    font-size: 100%;
+    border-radius: 50%;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  #cl1{
+    background-color: #BA68C8;
+  }
+  #cl2{
+    background-color: #AED581;
+  }
+  #cl3{
+    background-color: #E06055;
+  }
+  #cl4{
+    background-color: #57BB8A;
+  }
+
+  #cl5{
+    background-color: #F6BF26;
+  }
+
+  #cl6{
+    background-color: #008AC8;
+  }
+  #cl0{
+    background-color: #DDDDDD;
+  }
+}

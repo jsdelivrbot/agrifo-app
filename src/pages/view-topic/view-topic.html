@@ -1,0 +1,38 @@
+<ion-header>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title  *ngIf="topic" >{{ topic.title }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  class="pgbkgrnd">
+
+<div style="background-color: #FFF; margin-bottom: 5%"  *ngIf="topic" padding>
+     <p><span style="margin-right: 1%; color: #444">{{ topic.by_username}}</span> said: </p>
+
+      <h3 style="font-weight: bold; font-size: 120%; color: #444" (click)="viewTopic(topic.id)">{{ topic.title }}</h3>
+    <p>{{ topic.body }}...</p>
+        <img style="width: 80px; height: 80px" *ngIf="topic.image" src="{{ base_url }}/assets/uploads/forum/{{ topic.image }}" >
+
+    <p> <small>{{ topic.date_created}}</small></p>
+</div>
+<div *ngIf="replies" padding>
+	<div style="background-color: #FFF; margin-bottom: 1%; border-top: solid 1px #E2E2E2;"  *ngFor="let reply of replies" >
+
+	   <p><span class="name_badge" item-start id="cl{{ reply.cl_no }}">{{ reply.by_username | slice:0:1 }} </span> <span style="color: #444"> {{ reply.by_username}}</span>, on <small>{{ reply.reply_date}}</small></p>
+      <p>{{ reply.body }}</p>
+    <img style="width: 80px; height: 80px" *ngIf="reply.photo" src="{{ base_url }}/assets/uploads/forum/{{ reply.photo }}" >
+
+	</div>
+</div>
+
+<ion-fab  right bottom>
+    <button ion-fab mini color="light_green"  (click)="reply()" ><ion-icon name="md-create"></ion-icon></button>
+ </ion-fab>
+
+</ion-content>

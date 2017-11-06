@@ -1,0 +1,67 @@
+<ion-header>
+
+  <ion-navbar  color="light_green">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sell a product</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content  >
+<div style="background-color: #f4f4f4" >
+<ion-list >
+  <ion-item>
+    <ion-label color="dark">Product Name</ion-label>
+    <ion-input placeholder="my product"  [(ngModel)]="data.name" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="dark">Description</ion-label>
+    <ion-textarea style="height: 100px" placeholder="Text Input"  [(ngModel)]="data.description" ></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="dark" fixed>Price (NGN)</ion-label>
+    <ion-input type="number" placeholder="*****" [(ngModel)]="data.price"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label color="dark" fixed>Contact</ion-label>
+    <ion-input type="number" placeholder="080xxxxxxxxxx" [(ngModel)]="data.phone"></ion-input>
+  </ion-item>
+  
+  <ion-item *ngIf="categories">
+  <ion-label>Category</ion-label>
+  <ion-select [(ngModel)]="data.category" >
+    <ion-option  value="{{category.id}}"  *ngFor="let category of categories['0']">{{ category.name }}</ion-option>
+  </ion-select>
+</ion-item>
+<ion-item>
+
+  <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+  <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+
+  
+    <ion-buttons>
+      <button ion-button icon-left (click)="presentActionSheet()" color="dark" outline>
+        <ion-icon name="camera"></ion-icon>Select Image
+      </button>
+     <!--  <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+        <ion-icon name="cloud-upload"></ion-icon>Upload
+      </button> -->
+    </ion-buttons>
+</ion-item>
+
+  <ion-item>
+  	<button ion-button color="dark" (click)="addProduct()" full ><ion-icon name="md-add"></ion-icon> Sell Product</button>
+  </ion-item>
+
+  </ion-list>
+
+</div>
+
+
+</ion-content>

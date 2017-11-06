@@ -1,0 +1,62 @@
+<ion-header  no-border>
+
+  <ion-navbar  color="light_green" >
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>AGRIFO</ion-title>
+    <ion-buttons end>
+      <button ion-button clear large (click)="logout()">
+        <ion-icon name="ios-log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="background-color: #9ad84e">
+<ion-grid style="margin-top: 10vh">
+  <ion-row>
+    <ion-col col-6 class="menu_div">
+      <h3>MARKET</h3>
+    <button ion-button icon-only (click)="openMarketPage()" color="light_green" full class="menu_button">
+        <ion-icon name="md-cash" class="menu_icon"></ion-icon>
+      </button>
+    </ion-col>
+    <ion-col col-6 class="menu_div">
+      <h3>FORUM</h3>
+    <button ion-button icon-only (click)="openForum()"  color="light_green" full class="menu_button">
+        <ion-icon name="ios-people" class="menu_icon"></ion-icon>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col col-6 class="menu_div">
+    <button ion-button icon-only (click)="openMyshopPage()"  color="light_green" full class="menu_button">
+        <ion-icon name="md-briefcase" class="menu_icon"></ion-icon>
+      </button>
+      <h3>MY SHOP</h3>
+
+    </ion-col>
+    <ion-col col-6 class="menu_div">
+    <button ion-button icon-only  (click)="openProfilePage()" color="light_green" full class="menu_button">
+        <ion-icon name="md-contact" class="menu_icon"></ion-icon>
+      </button>
+      <h3>PROFILE</h3>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+ <!--    <div style="margin-top: 20%; background-size: cover; background-color: #8BC34A; color: #fff; padding: 6px">
+        <ion-icon name="ios-people" item-start></ion-icon> Agrifo forum: latest topics
+    </div>
+    <ion-list class="clear_bg">
+      <ion-item   *ngFor="let topic of topics"  (click)="viewTopic(topic.id)">
+       <h3 style="font-size: 120%; color: #8BC34A">{{ topic.title }} - <small> <span style="color: #666">{{ topic.date_created }}</span></small></h3>
+        </ion-item>
+
+    </ion-list> -->
+
+
+</ion-content>
