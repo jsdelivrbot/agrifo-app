@@ -1,10 +1,79 @@
 page-viewproduct {
 	#ad_details{
-		margin-top: 80%;
-	   background-color :  rgba(0,0,0,0.6);
-	   color : #fff;
+		background-color :  #fff;
+		color : #212121;
 		display: inline-block;
 		width: 100%;
-		border-top: 2px solid #8BC34A;
 	}
+
+	#ad_details h3{
+		font-size: 1.4em;
+	}
+
+	.pd3{
+		font-size: 1.4em;
+	}
+
+	.divider{
+		height: 6px;
+		background-color: #efefef;
+	}
+    .scroll-content{
+      padding-top: 0 !important;
+    }
+	.toolbar-ios-light .toolbar-title-ios, .toolbar-ios-light .bar-button-clear-ios, .toolbar-ios-light .bar-button-default-ios{
+	  color: #fff;
+	}
+	ion-navbar.toolbar{
+		background-color :  rgba(0,0,0,0.2);
+	}
+
+	ion-header {
+		border-bottom: none;
+	}
+	.toolbar-md-light .bar-button-clear-md, .toolbar-md-light .bar-button-default-md, .toolbar-md-light .bar-button-outline-md, .toolbar-md-light .toolbar-title-md{
+		color: #fff;
+	}
+
+	.ad43 img{
+		width: 100%;
+	}
+
+	.s2{
+		font-size: 0.8em;
+	}
+    .name_badge{
+	    color: #fff;
+	    margin-right: 2%;
+	    padding: 16px;
+	    line-height: 4px;
+	    font-size: 100%;
+	    border-radius: 50%;
+	    font-weight: bold;
+	    text-transform: uppercase;
+	  }
+
+	  #cl1{
+	    background-color: #BA68C8;
+	  }
+	  #cl2{
+	    background-color: #AED581;
+	  }
+	  #cl3{
+	    background-color: #E06055;
+	  }
+	  #cl4{
+	    background-color: #57BB8A;
+	  }
+
+	  #cl5{
+	    background-color: #F6BF26;
+	  }
+
+	  #cl6{
+	    background-color: #008AC8;
+	  }
+	  #cl0{
+	    background-color: #DDDDDD;
+	  }
 }

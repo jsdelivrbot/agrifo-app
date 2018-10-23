@@ -1,16 +1,16 @@
 <ion-header>
 
-  <ion-navbar  color="light_green">
-    <button ion-button menuToggle>
+  <ion-navbar  color="white">
+<!--     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </button> -->
     <ion-title>Your Account</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
 <ion-list *ngIf="profile">
 
@@ -26,14 +26,14 @@
     <ion-input placeholder="Phone Number"  [(ngModel)]="profile.phone"></ion-input>
   </ion-item>
 
-  <ion-item>
+<!--   <ion-item>
     <ion-label floating>Occupation</ion-label>
     <ion-input placeholder="Occupation"  [(ngModel)]="profile.occupation"></ion-input>
-  </ion-item>
+  </ion-item> -->
 
   <ion-item>
-    <ion-label floating>Location</ion-label>
-    <ion-input placeholder="Location"  [(ngModel)]="profile.location"></ion-input>
+    <ion-label floating>Your Address</ion-label>
+    <ion-input placeholder="Location"  [(ngModel)]="profile.address"></ion-input>
   </ion-item>
 
 </ion-list>

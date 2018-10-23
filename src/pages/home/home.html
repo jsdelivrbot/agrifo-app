@@ -1,13 +1,10 @@
 <ion-header  no-border>
 
-  <ion-navbar  color="light_green" >
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>AGRIFO</ion-title>
+  <ion-navbar  color="white" transparent>
+    <ion-searchbar (ionInput)="searchAds($event)" placeholder="Search "  [showCancelButton]="true"  (ionCancel)="onCancel($event)"></ion-searchbar>
     <ion-buttons end>
-      <button ion-button clear large (click)="logout()">
-        <ion-icon name="ios-log-out"></ion-icon>
+      <button ion-button clear large color="light_green" (click)="openFilterModal()">
+        <ion-icon style="font-size: 2em;" name="md-options"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -15,48 +12,41 @@
 </ion-header>
 
 
-<ion-content padding style="background-color: #9ad84e">
-<ion-grid style="margin-top: 10vh">
-  <ion-row>
-    <ion-col col-6 class="menu_div">
-      <h3>MARKET</h3>
-    <button ion-button icon-only (click)="openMarketPage()" color="light_green" full class="menu_button">
-        <ion-icon name="md-cash" class="menu_icon"></ion-icon>
-      </button>
-    </ion-col>
-    <ion-col col-6 class="menu_div">
-      <h3>FORUM</h3>
-    <button ion-button icon-only (click)="openForum()"  color="light_green" full class="menu_button">
-        <ion-icon name="ios-people" class="menu_icon"></ion-icon>
-      </button>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col col-6 class="menu_div">
-    <button ion-button icon-only (click)="openMyshopPage()"  color="light_green" full class="menu_button">
-        <ion-icon name="md-briefcase" class="menu_icon"></ion-icon>
-      </button>
-      <h3>MY SHOP</h3>
+<ion-content style="background-color: #f7f7f7" fullscreen>
 
-    </ion-col>
-    <ion-col col-6 class="menu_div">
-    <button ion-button icon-only  (click)="openProfilePage()" color="light_green" full class="menu_button">
-        <ion-icon name="md-contact" class="menu_icon"></ion-icon>
+
+  <div text-center style="margin-top: 20vh" *ngIf="noConnection && !loading2">
+    <ion-icon name="ios-flash-outline" style="font-size: 6em; color: #666"></ion-icon>
+    <p style=" color: #666">Could Not Connect</p>
+
+      <button ion-button outline small color="dark" (click)="LoadFilters()">
+        Tap to Reconnect
       </button>
-      <h3>PROFILE</h3>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+  </div>
 
- <!--    <div style="margin-top: 20%; background-size: cover; background-color: #8BC34A; color: #fff; padding: 6px">
-        <ion-icon name="ios-people" item-start></ion-icon> Agrifo forum: latest topics
-    </div>
-    <ion-list class="clear_bg">
-      <ion-item   *ngFor="let topic of topics"  (click)="viewTopic(topic.id)">
-       <h3 style="font-size: 120%; color: #8BC34A">{{ topic.title }} - <small> <span style="color: #666">{{ topic.date_created }}</span></small></h3>
-        </ion-item>
 
-    </ion-list> -->
+<div padding text-center  *ngIf="loading2 && !ads" style="margin-top: 5vh">
+   <ion-spinner style="font-size: 5em" color="light_green" name="crescent" ></ion-spinner>
+</div>
 
+
+  <div padding text-center *ngIf="ads && ads.length < 1 && !loading2" style="margin-top: 20vh">
+    <h5 style="color: #212121">Sorry... No Ad results at the moment</h5>
+    <ion-icon style="font-size: 8em; color: #8BC34A " name="md-search"></ion-icon>
+    <p style="color: #666">You can try changing your search term/location or category.</p>
+  </div>
+
+   <div class="wrapper">
+      <section class="ad_cont" *ngFor="let item of ads"  (click)="viewProduct(item)">
+        <img style="background-color:#f7f7fc"  src="{{ base_url }}/assets/uploads/user_ads/{{ item.image }}">
+		<div>
+			<h2>₦{{ item.price }}</h2>
+			<p class="f3">{{ item.name }}</p>
+			<p class="l3">{{ item.lga_name }}, {{ item.state_name }}</p>
+		</div>
+
+      </section>
+
+   </div>
 
 </ion-content>

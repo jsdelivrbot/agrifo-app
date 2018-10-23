@@ -17,6 +17,14 @@
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="getAds($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
 
 <div style="background-color: #f4f4f4" >
   

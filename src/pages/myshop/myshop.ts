@@ -59,7 +59,7 @@ createLoader() {
   }
 
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.createLoader();
 
       this.storage.get('ag_id').then(ag_id=>{

@@ -5,6 +5,9 @@ import { CommunityPage } from '../community/community';
 import { SearchPage } from '../search/search';
 import { ProfilePage } from '../profile/profile';
 import { MessagesPage } from '../messages/messages';
+import { AddproductPage } from '../addproduct/addproduct';
+import { MarketPage } from '../market/market';
+import { MyshopPage } from '../myshop/myshop';
 
 
 @Component({
@@ -13,13 +16,16 @@ import { MessagesPage } from '../messages/messages';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab3Root = CommunityPage;;
+  tab2Root = CommunityPage;
+  tab3Root = AddproductPage;
+  tab4Root = MyshopPage;
+  tab5Root = ProfilePage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TabsPage');
+
   }
 
 

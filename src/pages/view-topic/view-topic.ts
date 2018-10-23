@@ -21,7 +21,7 @@ export class ViewTopicPage {
   constructor(public navCtrl: NavController, public navParams: NavParams , private toastCtrl: ToastController, public loadingCtrl: LoadingController,  public http: Http) {
      let id = navParams.get('id');
      this.base_url = base_url;
-            this.createLoader();
+     this.createLoader();
      this.http.get( base_url + 'api/gettopic?key=43730487024f808fcxxxc22424' + '&id=' + id)
       .map(res => res.json())
       .subscribe(data => {
@@ -33,7 +33,7 @@ export class ViewTopicPage {
         entry.cl_no = r;
       });
       
-        this.topic = data.topic['0'];
+        this.topic = data.topic;
         this.replies = data.answers;
 
       },

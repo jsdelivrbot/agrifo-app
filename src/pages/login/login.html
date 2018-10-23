@@ -1,5 +1,51 @@
-<ion-content class="login-content" padding style="color: #8BC34A">
-  <ion-row class="logo-row">
+<ion-content class="login-content" style="color: #8BC34A">
+  <ion-slides pager style="height: 100vh"  autoplay="5000" loop="true">
+      <ion-slide>
+        <img style="height: 100vh; width: 100%" src="assets/img/sdds.jpg">
+      </ion-slide>
+      <ion-slide>
+        <img style="height: 100vh; width: 100%" src="assets/img/swew.jpg">
+      </ion-slide>
+      <ion-slide>
+        <img style="height: 100vh; width: 100%" src="assets/img/fss.jpg">
+      </ion-slide>
+  </ion-slides>
+
+   <div class="login-box" padding>
+    <form #registerForm="ngForm">
+        <ion-row class="logo-row" style="" text-center padding>
+            <img height="75px" src="assets/img/logo_alt.png"/>
+        </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+            
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Email Address</ion-label>
+              <ion-input style="color: #fff" type="text"  name="email" [(ngModel)]="userDetails.email" required></ion-input>
+            </ion-item>
+            
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Password</ion-label>
+              <ion-input style="color: #fff" type="password" name="password" [(ngModel)]="userDetails.password" required></ion-input>
+            </ion-item>
+            
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" color="white" (click)="login()">Login</button>
+          <button ion-button class="register-btn" block outline color="light" (click)="createAccount()">Create New Account</button>
+          <!-- <button ion-button class="register-btn" block clear color="light" (click)="launch( base_url + 'account/forgot')">Forgot Password</button> -->
+        </ion-col>
+      </ion-row>
+      
+    </form>
+  </div>
+
+  <!-- <ion-row class="logo-row">
     <ion-col></ion-col>
     <ion-col width-67>
       <img height="120px" src="img/agrifo_blank_white.png" style=" display: inline-block; margin-left: auto; margin-right: auto">
@@ -32,5 +78,5 @@
       </ion-row>
       
     </form>
-  </div>
+  </div> -->
 </ion-content>

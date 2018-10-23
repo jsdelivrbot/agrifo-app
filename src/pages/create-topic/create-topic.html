@@ -22,8 +22,15 @@
   <ion-item>
     <ion-input type="text" placeholder="Enter title" [(ngModel)]="data.title" required></ion-input>
   </ion-item>
+  
+<ion-item *ngIf="groups">
+  <ion-label floating>Select Group</ion-label>
+  <ion-select [(ngModel)]="data.group_id" interface="popover">
+    <ion-option  value="{{group.id}}"  *ngFor="let group of groups">{{ group.name }}</ion-option>
+  </ion-select>
+</ion-item>
   <ion-item>
-    <ion-textarea placeholder="Say Something" rows="80" [(ngModel)]="data.body" required></ion-textarea>
+    <ion-textarea placeholder="Say Something" rows="40" [(ngModel)]="data.body" required></ion-textarea>
   </ion-item>
 </ion-list>
 <ion-list no-lines>
@@ -31,6 +38,7 @@
   <img src="{{pathForImage(lastImage)}}" style="width: 100px; height: 100px" [hidden]="lastImage === null">
 
   </ion-item>
+
 </ion-list>
 
 

@@ -138,12 +138,6 @@ createLoader() {
   }
 
 
-  onCancel() {
-    this.searching = false;
-    // this.results = [];
-    // this.getProducts();
-  }
-
   searchItems(ev: any) {
     // this.getItems();
     this.searching = true;
@@ -152,9 +146,12 @@ createLoader() {
     // console.log(this.items);
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-    this.http.get( base_url + 'api/search_item?key=43730487024f808fcxxxc22424' + '&term=' + val )
+    this.http.get( base_url + 'api/search_ads?key=43730487024f808fcxxxc22424' + '&q=' + val )
         .map(res => res.json())
         .subscribe(data => {
+          this.products = data;
+          let products = data;
+          this.products = Object.keys( products ).map( p => Object.assign( products[p], {products:p} ) );
             // this.items = data;
       // console.log(this.items);
              // this.i = this.items;
@@ -195,6 +192,93 @@ createLoader() {
         },
         err => { 
               this.loading.dismiss();
+              this.presentToast("Could not connect, please check your connection");
+              // reject(err);
+        })  
+
+    this.http.get( base_url + 'api/get_categories?key=43730487024f808fcxxxc22424')
+        .map(res => res.json())
+        .subscribe(data => {
+          this.categories = data.categories;
+          // let products = data;
+          // this.products = Object.keys( products ).map( p => Object.assign( products[p], {products:p} ) );
+          console.log(this.categories);
+        })  
+      });
+
+      }
+
+  getAds(ev) {
+
+      this.storage.get('ag_id').then(ag_id=>{
+          this.id = ag_id;
+
+    this.http.get( base_url + 'api/get_all_products?key=43730487024f808fcxxxc22424'+ "&user_id=" + this.id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.products = data;
+          let products = data;
+          this.products = Object.keys( products ).map( p => Object.assign( products[p], {products:p} ) );
+          console.log(this.products);
+
+          this.products.forEach((item, index) => {
+            let indexOfItem = this.cats.findIndex(i => i.id === item.category);
+          if(indexOfItem > -1){
+
+              }else{
+                this.cats.push({id: item.category, name: item.category_name})
+              }
+            });
+
+        setTimeout(() => {
+            ev.complete();
+          }, 2000);
+        },
+        err => { 
+
+          setTimeout(() => {
+              ev.complete();
+            }, 2000);
+          this.presentToast("Could not connect, please check your connection");
+              // reject(err);
+        })  
+
+    this.http.get( base_url + 'api/get_categories?key=43730487024f808fcxxxc22424')
+        .map(res => res.json())
+        .subscribe(data => {
+          this.categories = data.categories;
+          // let products = data;
+          // this.products = Object.keys( products ).map( p => Object.assign( products[p], {products:p} ) );
+          console.log(this.categories);
+        })  
+      });
+
+      }
+
+  onCancel() {
+
+      this.storage.get('ag_id').then(ag_id=>{
+          this.id = ag_id;
+
+    this.http.get( base_url + 'api/get_all_products?key=43730487024f808fcxxxc22424'+ "&user_id=" + this.id)
+        .map(res => res.json())
+        .subscribe(data => {
+          this.products = data;
+          let products = data;
+          this.products = Object.keys( products ).map( p => Object.assign( products[p], {products:p} ) );
+          console.log(this.products);
+
+          this.products.forEach((item, index) => {
+            let indexOfItem = this.cats.findIndex(i => i.id === item.category);
+          if(indexOfItem > -1){
+
+              }else{
+                this.cats.push({id: item.category, name: item.category_name})
+              }
+            });
+
+        },
+        err => { 
               this.presentToast("Could not connect, please check your connection");
               // reject(err);
         })  

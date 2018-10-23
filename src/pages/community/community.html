@@ -1,94 +1,349 @@
-<ion-header>
+<ion-header class="c_header">
 
-  <ion-navbar  color="light_green">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Agrifo farmers forum</ion-title>
+  <ion-navbar  color="white">
+
+<ion-segment  color="light_green"  [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)" >
+  <ion-item no-lines color="clear_bg" style="padding-top: 0px">
+
+      <ion-scroll scrollX="true">
+<!--     <ion-segment-button  class="scroll-item selectable-icon" value="first">
+      HOME
+    </ion-segment-button> -->
+    <ion-segment-button attr.id="bt{{i}}"  class="scroll-item selectable-icon" [ngClass]="{'active' : selectedSegment == i}" *ngFor="let option of groups; let i=index;" [value]="i" (click)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+</ion-scroll>
+  </ion-item>
+</ion-segment>
   </ion-navbar>
+<!--   <ion-toolbar color="light_green">
+    <ion-segment [(ngModel)]="relationship" color="light">
+      <ion-item no-lines color="clear_bg" style="padding: 0px">
+
+       <button ion-button clear color="light" (click)="scrollToLeft()" item-start>
+          <ion-icon name="ios-arrow-back"></ion-icon>
+        </button>
+       <button ion-button clear color="light" (click)="scrollToRight()" item-end>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </button>
+
+        <ion-scroll  #scroll scrollX="true" style="width:100vw;height:50px" >
+              <span class="scroll-item selectable-icon">
+
+             <ion-segment-button value="friends">
+                Friends
+              </ion-segment-button>
+            </span>
+              <span class="scroll-item selectable-icon">
+                <ion-segment-button  *ngFor="let option of groups; let i=index;" [value]="i" (tap)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+              </span>
+              <span class="scroll-item selectable-icon">
+                <ion-segment-button  *ngFor="let option of groups; let i=index;" [value]="i" (tap)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+              </span>
+
+        </ion-scroll>
+      </ion-item>
+    </ion-segment>
+  </ion-toolbar> -->
 
 </ion-header>
 
 
 <ion-content  >
-<div style="background-color: #f4f4f4" >
 
-    <ion-list style="background-color: #FFF">
-       
+<ion-slides #mySlider (ionSlideDidChange)="onSlideChanged($event)">
+    <ion-slide *ngFor="let option of groups; let t=index;">
+      <div>
+    <div *ngIf="t == 0">
+        <ion-list style="background-color: #FFF">
+          <ion-item *ngFor="let topic of topics" style=" padding-top: 0px;  padding-bottom: 0px"  (click)="viewTopic(topic.id)">
+            <ion-avatar *ngIf="topic.user_photo" item-start>
+                <img style="" src="{{ base_url }}/assets/uploads/profile/{{ topic.user_photo }}" >
+            </ion-avatar>
+            <span class="name_badge" item-start id="cl{{ topic.cl_no }}" *ngIf="!topic.user_photo">
+              {{ topic.by_username | slice:0:1 }}
+            </span>
+            <p style="margin-top: 3%; margin-bottom: 3%">by <span style="margin-right: 3%; color: #444">{{ topic.by_username }}</span>  <small style="margin-right: 5%">{{ topic.date_created}}</small> </p>
+            <div text-wrap>
+              <h3 style="font-weight: bold; color: #111; margin-bottom: 3%">{{ topic.title }}</h3>
+            </div>
+            <div >
+              <p><ion-icon name="ios-chatbubbles-outline"></ion-icon>
+              Replies ({{ topic.replies }}) - <small>last reply: {{ topic.last_answered }}</small></p>
+            </div>
+          </ion-item>
+      </ion-list>
+    </div>
+    <div *ngIf="t !== 0">
 
-  <ion-item *ngFor="let topic of topics" style=" padding-top: 0px;  padding-bottom: 0px"  (click)="viewTopic(topic.id)">
-   <span class="name_badge" item-start id="cl{{ topic.cl_no }}">
-          {{ topic.by_username | slice:0:1 }}
-    </span>
+        <div padding text-center  *ngIf="loadingGtopics" style="">
+          <p>loading...</p>
+        </div>
 
-    <p style="margin-top: 3%; margin-bottom: 3%">by <span style="margin-right: 3%; color: #444">{{ topic.by_username }}</span>  <small style="margin-right: 5%">{{ topic.date_created}}</small> 
-    <div text-wrap>
-      <h3 style="font-weight: bold; color: #111; margin-bottom: 3%">{{ topic.title }}</h3>
-  </div>
-    <div >
+        <div padding text-center  *ngIf="loadingGtopics" style="">
+           <ion-spinner style="font-size: 5em" color="primary" name="crescent" ></ion-spinner>
+        </div>
+        <ion-list style="background-color: #FFF">
+        <ion-item *ngFor="let topic of Gtopics" style=" padding-top: 0px;  padding-bottom: 0px"  (click)="viewTopic(topic.id)">
+          <ion-avatar *ngIf="topic.user_photo" item-start>
+              <img style="" src="{{ base_url }}/assets/uploads/profile/{{ topic.user_photo }}" >
+          </ion-avatar>
+          <span class="name_badge" item-start id="cl{{ topic.cl_no }}" *ngIf="!topic.user_photo">
+            {{ topic.by_username | slice:0:1 }}
+          </span>
+          <p style="margin-top: 3%; margin-bottom: 3%">by <span style="margin-right: 3%; color: #444">{{ topic.by_username }}</span>  <small style="margin-right: 5%">{{ topic.date_created}}</small> </p>
+          <div text-wrap>
+            <h3 style="font-weight: bold; color: #111; margin-bottom: 3%">{{ topic.title }}</h3>
+          </div>
+          <div >
             <p><ion-icon name="ios-chatbubbles-outline"></ion-icon>
             Replies ({{ topic.replies }}) - <small>last reply: {{ topic.last_answered }}</small></p>
+          </div>
+        </ion-item>
+      </ion-list>
     </div>
+      </div>
+    </ion-slide>
+
+
+
+</ion-slides>
+
+
+<!--     <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)" color="light">
+  <ion-row>
+    <ion-item no-lines color="clear_bg">
+      <ion-scroll scrollX="true">
+          <ion-segment-button class="scroll-item selectable-icon" value="{{ group.name }}" *ngFor="let group of groups">
+            {{ group.name }}
+          </ion-segment-button>
+      </ion-scroll>
+    </ion-item>
+  </ion-row>
+    </ion-segment> -->
+<!--     <ion-segment [(ngModel)]="relationship" color="primary">
+      <ion-item no-lines color="clear_bg">
+
+       <button ion-button (click)="scrollToLeft()" item-start>
+          <ion-icon name="user"></ion-icon>
+        </button>
+       <button ion-button (click)="scrollToRight()" item-end>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+
+        <ion-scroll  #scroll scrollX="true" style="width:100vw;height:50px" >
+              <span class="scroll-item selectable-icon">
+
+             <ion-segment-button value="friends">
+                Friends
+              </ion-segment-button>
+            </span>
+              <span class="scroll-item selectable-icon">
+                <ion-segment-button  *ngFor="let option of groups; let i=index;" [value]="i" (tap)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+              </span>
+              <span class="scroll-item selectable-icon">
+                <ion-segment-button  *ngFor="let option of groups; let i=index;" [value]="i" (tap)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+              </span>
+
+        </ion-scroll>
+      </ion-item>
+    </ion-segment> -->
+<!--       <ion-toolbar color="light_green">
+    <ion-segment (ionChange)="onSegmentChanged($event)" color="light">
+    <ion-item no-lines color="clear_bg">
+      <ion-scroll scrollX="true">
+          <span class="scroll-item selectable-icon">
+            <ion-segment-button value="first">
+              HOME
+            </ion-segment-button>
+          </span>
+          <span class="scroll-item selectable-icon" *ngFor="let group of groups; let i=index;" >
+            <ion-segment-button  [value]="i"  (tap)="setOption(i, $event)">
+              {{ group.name }}
+            </ion-segment-button>
+          </span>
+      </ion-scroll>
+    </ion-item>
+  </ion-segment>
+</ion-toolbar> -->
+<!--     <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)" color="light_green">
+  <div class="scroll-item">
+            <ion-segment-button value="first">
+              HOME
+            </ion-segment-button>
+  </div>
+  <div class="scroll-item" *ngFor="let group of groups">
+            <ion-segment-button value="firssst">
+              HOME
+            </ion-segment-button>
+  </div>
+  </ion-segment> -->
+
+<!-- 
+<ion-segment  color="light_green" >
+  <ion-item no-lines color="clear_bg" style="padding-top: 0px">
+
+      <ion-scroll scrollX="true">
+    <ion-segment-button  class="scroll-item selectable-icon" value="first">
+      HOME
+    </ion-segment-button>
+    <ion-segment-button  class="scroll-item selectable-icon" [ngClass]="{'active' : selectedSegment == i}" *ngFor="let option of groups; let i=index;" [value]="i" (click)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+</ion-scroll>
   </ion-item>
+</ion-segment> -->
+<!-- 
+
+ <div [ngSwitch]="Segments" *ngIf="groups">
+        <div  *ngFor="let group of groups">
+          <div *ngSwitchCase="group.id">
+              SEGMENT CONTENT {{ group.id}}
+              <button ion-button (click)="Segments = group.id">NEXT</button>
+          </div>
+        </div>
+    </div> -->
+<!-- <ion-segment  >
+  <ion-segment-button value="first">
+    HOME
+  </ion-segment-button>
+  <ion-segment-button *ngFor="let option of groups; let i=index;" [value]="i" (tap)="setOption(i, $event)">{{option.name}}</ion-segment-button>
+</ion-segment> -->
+
+    <!-- <ion-segment [(ngModel)]="Segments" *ngIf="groups">
+        <ion-segment-button  (ionSelect)="Segments = group.id" value="group.id" *ngFor="let group of groups">
+            2 >
+        </ion-segment-button>
+    </ion-segment> -->
+  <!-- </ion-row> -->
+  <!-- </ion-toolbar> -->
 
 
-<!--        <h3 style="font-weight: bold; font-size: 120%; color: #009688" (click)="viewTopic(topic.id)">{{ topic.title }}</h3>
+  <!-- <ion-toolbar color="light_green" *ngIf="!groups"> -->
+    <!-- <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)" color="light">
+      <ion-slides style="" [autoplay]="" slidesPerView="3.5" spaceBetween="1" #segslides>
+        <ion-slide>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+        </ion-slide>
+        <ion-slide *ngFor="let group of groups">
+          <ion-segment-button value="{{ group.name }}">
+            {{ group.name }}
+          </ion-segment-button>
+        </ion-slide>
+      </ion-slides>
+    </ion-segment> -->
+  <!-- </ion-toolbar> -->
+<!--   <ion-row>
+    <ion-item no-lines>
+      <ion-scroll scrollX="true">
+          <ion-segment-button class="scroll-item selectable-icon" value="{{ group.name }}" *ngFor="let group of groups">
+            {{ group.name }}
+          </ion-segment-button>
+      </ion-scroll>
+    </ion-item>
+  </ion-row> -->
+<!--   <ion-scroll scrollx="true"  style="height: 100px; width: 1000px"> 
+    <div style="width: 900px; height: 100px">
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="onSegmentChanged($event)" color="dark">
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
+          <ion-segment-button value="first">
+            HOME
+          </ion-segment-button>
 
-     <ion-row>
-      <ion-col style="background-color: ">
-    <span class="name_badge" item-start id="cl{{ topic.cl_no }}">
-          {{ topic.by_username | slice:0:1 }}
-    </span>
+    </ion-segment>
+  </div>
+  </ion-scroll> -->
 
-        <p style="color: #8BC34A"><ion-icon name="md-person"></ion-icon> <span style="margin-right: 3%; color: #444">{{ topic.by_username}}</span> <ion-icon name="ios-clock-outline"></ion-icon> <small style="margin-right: 5%">{{ topic.date_created}}</small> 
-        
-        <ion-icon name="ios-chatbubbles-outline"></ion-icon>
-        
-        <span style="margin-right: 5%">{{ topic.replies}}</span>
-        
-        <ion-icon name="ios-eye-outline"></ion-icon>
-         
-          <span *ngIf="topic.views">{{ topic.views}}</span>
-          <span *ngIf="!topic.views">0</span></p>
-      </ion-col>
-    </ion-row>
+<!--   <div *ngIf="groups" style="background-color: #f7f7f7">
 
+        <div padding>
+            <h4 style="display: inline; height: 100%">Suggested topics</h4>
+        </div>
+        <ion-slides pager style="height: 250px; padding: 0; margin-top: -50px" [autoplay]="3000" slidesPerView="1.5" spaceBetween="10">
+            <ion-slide *ngFor="let group of groups"  (click)="viewTopic(topic.id)">
 
-    <p>{{ topic.body | slice:0:80}}...</p>
-    <p><small>{{ topic.date_created }}</small></p>
- -->
-    </ion-list>
+                    <ion-item>
+                        <h2>{{ group.name }}</h2>
+                    </ion-item>
 
-<!--   <ion-card *ngFor="let topic of topics" style="background-color: #FFF">
-    <ion-card-header>
-      <h3 style="font-weight: bold; font-size: 120%; color: #001279" (click)="viewTopic(topic.id)">{{ topic.title }}</h3>
-    </ion-card-header>
-    <ion-card-content>
-    <p>{{ topic.body | slice:0:80}}...</p>
-    <p><small>{{ topic.date_created }}</small></p>
-
-    </ion-card-content>
-     <ion-row>
-      <ion-col>
-      <ion-card-header style="background-color: #f7f7f7">
-
-        <p><ion-icon name="md-person"></ion-icon> <span style="margin-right: 3%; color: #444">{{ topic.by_username}}</span> <ion-icon name="ios-clock-outline"></ion-icon> <small style="margin-right: 5%">{{ topic.date_created}}</small> 
-        
-        <ion-icon name="ios-chatbubbles-outline"></ion-icon>
-        
-        <span style="margin-right: 5%">{{ topic.replies}}</span>
-        
-        <ion-icon name="ios-eye-outline"></ion-icon>
-         
-          <span *ngIf="topic.views">{{ topic.views}}</span>
-          <span *ngIf="!topic.views">0</span></p>
-
-      </ion-card-header>
-
-      </ion-col>
-    </ion-row>
-  </ion-card>
- -->
+            </ion-slide>
+        </ion-slides> 
+    </div> -->
+<div style="background-color: #f4f4f4" >
+  <!-- <div>
+    <div class="welcome_message">
+        <h2>Share knowledge and ask questions on topics related to agriculture in <span>Agrifo Forum</span>.</h2>
+    </div>
+  </div> -->
+<!--   <ion-list style="background-color: #FFF">
+    <ion-item *ngFor="let topic of topics" style=" padding-top: 0px;  padding-bottom: 0px"  (click)="viewTopic(topic.id)">
+      <ion-avatar *ngIf="topic.user_photo" item-start>
+          <img style="" src="{{ base_url }}/assets/uploads/profile/{{ topic.user_photo }}" >
+      </ion-avatar>
+      <span class="name_badge" item-start id="cl{{ topic.cl_no }}" *ngIf="!topic.user_photo">
+        {{ topic.by_username | slice:0:1 }}
+      </span>
+      <p style="margin-top: 3%; margin-bottom: 3%">by <span style="margin-right: 3%; color: #444">{{ topic.by_username }}</span>  <small style="margin-right: 5%">{{ topic.date_created}}</small> </p>
+      <div text-wrap>
+        <h3 style="font-weight: bold; color: #111; margin-bottom: 3%">{{ topic.title }}</h3>
+      </div>
+      <div >
+        <p><ion-icon name="ios-chatbubbles-outline"></ion-icon>
+        Replies ({{ topic.replies }}) - <small>last reply: {{ topic.last_answered }}</small></p>
+      </div>
+    </ion-item>
+  </ion-list> -->
 
 </div>
 

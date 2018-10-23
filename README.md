@@ -1,26 +1,14 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Agrifo Mobile App ![CI status](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-## How to use this template
+Agrifo is a mobile app made to help people engaged in agriculture in Nigeria. Users can signup, and sell their farm produce to people near and far. Agrifo also has a forum in which users can discuss about their everyday farming activities, issues and tips.
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+## Installation
+Please download and install apk: [DOWNLOAD APK](https://choosealicense.com/licenses/mit/) 
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+### Features
+* Agrifo Market
+* Agrifo Forum
 
-### With the Ionic CLI:
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
-```
-
-Then, to run it, cd into `myBlank` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
-
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

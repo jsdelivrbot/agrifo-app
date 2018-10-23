@@ -1,0 +1,49 @@
+   <ion-header>
+
+  <ion-navbar color="white">
+    <ion-title> Filter Ads</ion-title>
+    <ion-buttons end>
+    <button ion-button clear large (click)="dismiss()">
+      <ion-icon name="md-close"></ion-icon>
+    </button>
+
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+
+  <ion-list>
+  
+    <ion-item *ngIf="categories">
+      <ion-label style="color: #212121">Category</ion-label>
+      <ion-select [(ngModel)]="data.category" interface="popover">
+        <ion-option  value="{{category.id}}"  *ngFor="let category of categories['0']">{{ category.name }}</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="states">
+    <ion-label color="dark">State</ion-label>
+    <ion-select name="state" [(ngModel)]="data.state" required  (ngModelChange)="filterLga(data.state)">
+      <ion-option *ngFor="let state of states"  value="{{state.id}}">{{ state.name }}</ion-option>
+    </ion-select>
+  </ion-item>
+    <ion-item *ngIf="states">
+    <ion-label color="dark">Local Govt. Area</ion-label>
+    <ion-select [disabled]="!data.state" name="lga" [(ngModel)]="data.lga" required>
+      <ion-option  *ngFor="let lga of filtered_lga"  value="{{lga.id}}">{{ lga.name }}</ion-option>
+    </ion-select>
+  </ion-item> 
+
+
+  </ion-list>
+
+  <ion-item>
+    <button ion-button color="light_green" [disabled]="!data.category && !data.state && !data.lga" (click)="save()" full >Apply</button>
+  </ion-item>
+
+</ion-content>
+<style>
+
+</style>

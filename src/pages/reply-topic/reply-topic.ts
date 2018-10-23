@@ -50,7 +50,7 @@ export class ReplyTopicPage {
 
 
         // Destination URL
-        var url = base_url + "api/reply_topic?key=43730487024f808fcxxxc22424" +'&reply_by=' +  this.ag_id  + '&body=' + encodeURIComponent(data.body).replace(/%20/g,'+')  + '&topic=' + data.topic   + '&by_username=' + 'kazim';
+        var url = base_url + "api/reply_topic?key=43730487024f808fcxxxc22424" +'&reply_by=' +  this.ag_id  + '&body=' + encodeURIComponent(data.body).replace(/%20/g,'+')  + '&topic=' + data.topic;
         
         // File for Upload
         var targetPath = this.pathForImage(this.lastImage);
@@ -88,7 +88,7 @@ export class ReplyTopicPage {
     }else{
     this.createLoader();
   
-	  	this.http.get( base_url + 'api/reply_topic?key=43730487024f808fcxxxc22424' + '&reply_by=' +  this.ag_id  + '&body=' + data.body  + '&topic=' + data.topic   + '&by_username=' + 'kazim' )
+	  	this.http.get( base_url + 'api/reply_topic?key=43730487024f808fcxxxc22424' + '&reply_by=' +  this.ag_id  + '&body=' + data.body  + '&topic=' + data.topic  )
 	      .map(res => res.json())
 	      .subscribe(data => {
 	        console.log(data);

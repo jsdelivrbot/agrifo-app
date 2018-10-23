@@ -1,3 +1,15 @@
 page-addproduct {
-
+	.img_button{
+		border: dashed 2px #666;
+		color: #666;
+		padding-top: 18px !important;
+		padding-left: 18px !important;
+		padding-right: 18px !important;
+		padding-bottom: 18px !important;
+		min-height: 60px;
+		border-radius: 4px;
+	}
+	.img_button .icon .icon-md{
+		font-size: 5em;
+	}
 }

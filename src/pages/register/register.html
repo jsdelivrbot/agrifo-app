@@ -1,44 +1,55 @@
 
 <ion-header>
   <ion-navbar color="dark">
-    <ion-title>Register</ion-title>
+    <ion-title>Sign Up</ion-title>
   </ion-navbar>
 </ion-header>
  
-<ion-content class="login-content" padding>
+<ion-content class="login-content" style="background-image: url('assets/img/swew.jpg'); background-size: cover;">
   <div class="login-box">
     
-    <form (ngSubmit)="register()" #registerForm="ngForm">
+    <form #registerForm="ngForm">
       <ion-row>
         <ion-col>
-          <ion-list inset>
-            
-            <ion-item>
-              <ion-input type="text" placeholder="Username" name="username" [(ngModel)]="registerCredentials.username" required></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+          <ion-list>
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Full Name</ion-label>
+              <ion-input type="text" name="name" [(ngModel)]="registerCredentials.name" required></ion-input>
             </ion-item>
             
-            <ion-item>
-              <ion-input type="number" placeholder="Phone Number" name="number" [(ngModel)]="registerCredentials.phone" required></ion-input>
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Email Address</ion-label>
+              <ion-input type="email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
             </ion-item>
             
-            <ion-item>
-              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Phone Number</ion-label>
+              <ion-input type="number" name="number" [(ngModel)]="registerCredentials.phone" required></ion-input>
             </ion-item>
             
-            <ion-item>
-              <ion-input type="password" placeholder="Repeat Password" name="password2" [(ngModel)]="registerCredentials.password2" required></ion-input>
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Password</ion-label>
+              <ion-input type="password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+            </ion-item>
+            
+            <ion-item color="clear_bg">
+              <ion-label floating color="light">Repeat Password</ion-label>
+              <ion-input type="password" name="password2" [(ngModel)]="password2" required></ion-input>
             </ion-item>
             
           </ion-list>
         </ion-col>
       </ion-row>
+        <div *ngIf="registerCredentials.email && !validEmail()" text-center>
+              <p style="color: #fff" *ngIf="registerCredentials.email && !validEmail()">Email not valid.</p>
+        </div>
+        <div *ngIf="registerCredentials.password && password2" text-center>
+          <p *ngIf="registerCredentials.password !== password2" style="color: #fff">Second password does not match first password</p>
+        </div>
       
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Register</button>
+          <button  (click)="register()" ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid || registerCredentials.password !== password2 || !validEmail()">Register</button>
         </ion-col>
       </ion-row>
       

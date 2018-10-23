@@ -35,17 +35,11 @@ export class MyApp {
         { title: 'Market', component: MarketPage , icon: 'md-cash'},
         { title: 'My Shop', component: MyshopPage , icon: 'md-briefcase'},
         { title: 'You', component: ProfilePage , icon: 'md-contact'}
-      ];
-
-      this.storage.get('email').then(email=>{
-        console.log('email: '+ email);
-      });
-
-
+      ];  
 
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
+      statusBar.backgroundColorByHexString('#ccc');
       splashScreen.hide();
 
     });
@@ -56,7 +50,7 @@ export class MyApp {
        this.storage.get('ag_id')
       .then((ag_id) => {
         if (ag_id) {
-              this.nav.setRoot(HomePage);
+              this.nav.setRoot(TabsPage);
 
           // this.rootPage = ResourcesPage;
         } else {

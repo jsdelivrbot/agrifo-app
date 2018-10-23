@@ -16,6 +16,7 @@ import { ReplyTopicPage } from '../pages/reply-topic/reply-topic';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { FilterModal } from '../pages/home/home';
 import { RegisterPage } from '../pages/register/register';
 import { SearchPage } from '../pages/search/search';
 import { ProfilePage } from '../pages/profile/profile';
@@ -45,6 +46,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     ProfilePage, 
     ReplyTopicPage,
     MyshopPage,
+    FilterModal,
     AddproductPage,
     MarketPage,
     SearchPage, 
@@ -69,6 +71,7 @@ import { AuthServiceProvider } from '../providers/auth-service/auth-service';
     ViewTopicPage,
     CommunityPage,
     AddproductPage, 
+    FilterModal,
     ViewproductPage,
     MarketPage,
     SearchPage, 

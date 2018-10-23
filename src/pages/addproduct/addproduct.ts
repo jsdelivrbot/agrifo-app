@@ -19,25 +19,21 @@ declare var cordova: any;
   templateUrl: 'addproduct.html',
 })
 export class AddproductPage {
-	data = { name: '', description: '', category: '', price: '', phone: '', image: '', user_id: ''};
+	data = { type: 'product', name: '', description: '', state: '', lga: '', category: '', price: '', phone: '', image: '', user_id: '', quantity: ''};
 	id : any;
 	categories : any;
   base_url : any;
   lastImage: string = null;
   loading: Loading;
-  // constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, private toastCtrl: ToastController, private storage: Storage) {
-  // }
+  states: any;
+  lga: any;
+  filtered_lga;
+
   constructor(public navCtrl: NavController,  public navParams: NavParams, public http: Http, private camera: Camera, private transfer: Transfer, private storage: Storage, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) { 
     this.base_url = base_url;
   }
 
   addProduct(){
-  	// this.storage.get('ag_id')
-  	// 	.then((ag_id) => {
-   //    });
-
-
-
       this.storage.get('ag_id').then(ag_id=>{
         	this.id = ag_id;
       });
@@ -63,6 +59,41 @@ export class AddproductPage {
 	  // 	})
   }
 
+
+  loadStates(){
+      this.http.get( base_url + 'api/get_all_states?key=43730487024f808fcxxxc22424')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.states = data;
+        // console.log(data);
+      },
+        err => { 
+
+        setTimeout(() => {
+              this.presentToast("Could not connect, please check your connection");
+          }, 3000);
+        })
+    
+  } 
+
+  
+
+
+  loadLga(){
+      this.http.get( base_url + 'api/get_all_lga?key=43730487024f808fcxxxc22424')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.lga = data;
+        // console.log(data);
+      },
+        err => { 
+
+        setTimeout(() => {
+              this.presentToast("Could not connect, please check your connection");
+          }, 3000);
+        })
+    
+  } 
    presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Select Image Source',
@@ -151,15 +182,20 @@ takePicture(sourceType) {
   });
 }
 
+  ngAfterViewInit() {
+      this.loadStates();
+      this.loadLga();
+    }
 public uploadImage() {
 
   this.storage.get('ag_id').then(ag_id=>{
       this.id = ag_id;
 
+                                                                                                                                                                                                                                                                                                // data = { type: 'product', name: '', description: '', state: '', lga: '', category: '', price: '', phone: '', image: '', user_id: ''};
 
     this.data.user_id = this.id;
   // Destination URL
-  var url = this.base_url + "api/add_product?key=43730487024f808fcxxxc22424" + "&name=" + encodeURIComponent(this.data.name ).replace(/%20/g,'+') + "&description=" + encodeURIComponent(this.data.description ).replace(/%20/g,'+')  + "&category=" + this.data.category + "&price=" + this.data.price + "&phone=" + this.data.phone + "&user_id=" + ag_id;
+  var url = this.base_url + "api/add_product?key=43730487024f808fcxxxc22424" + "&name=" + encodeURIComponent(this.data.name ).replace(/%20/g,'+') + "&description=" + encodeURIComponent(this.data.description ).replace(/%20/g,'+')  + "&category=" + this.data.category + "&price=" + this.data.price + "&phone=" + this.data.phone  + "&type=" + this.data.type  + "&state=" + this.data.state  + "&lga=" + this.data.lga   + "&quantity=" + this.data.quantity  + "&phone=" + this.data.phone + "&user_id=" + ag_id;
   
   // data = { name: '', description: '', category: '', price: '', phone: '', image: '', user_id: ''};
 
@@ -198,6 +234,14 @@ public uploadImage() {
 
 }
 
+
+  filterLga(s_id){    
+    this.filtered_lga = this.lga.filter((lga) => {
+           return (lga.state_id == s_id);
+           // return (lga.state_id == s_id > -1);
+           // return (lga.state_id.indexOf(s_id) > -1);
+      })
+  }
 
   ionViewDidLoad() {
 		this.http.get( base_url + 'api/get_categories?key=43730487024f808fcxxxc22424')

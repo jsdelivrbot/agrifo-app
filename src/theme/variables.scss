@@ -45,6 +45,8 @@ $colors: (
   white:  #fff,
   light_green: #8BC34A,
   teal: #009688,
+  tabs-color :  rgba(255,255,255,0.2),
+  clear_bg :  rgba(255,255,255,0),
 );
 
 
@@ -92,3 +94,11 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+
+
+.tab-button-icon{
+  color: #aaa;  
+  font-size: 2.2em !important;
+  font-weight: bold;
+}

@@ -18,10 +18,11 @@ declare var cordova: any;
   templateUrl: 'create-topic.html',
 })
 export class CreateTopicPage {
-  data = { title: '', body: '', user_id : 0};
+  data = { title: '', body: '', user_id : 0, group_id: 1};
   lastImage: string = null;
   loading: Loading;
   ag_id : any;
+  groups : any;
   constructor(public navCtrl: NavController,  public navParams: NavParams, public http: Http, private camera: Camera, private transfer: Transfer, private storage: Storage, private file: File, private filePath: FilePath, public actionSheetCtrl: ActionSheetController, public toastCtrl: ToastController, public platform: Platform, public loadingCtrl: LoadingController) { 
   }
 
@@ -34,12 +35,33 @@ export class CreateTopicPage {
       });
    }
 
+
+  ngAfterViewInit() {
+      this.loadGroups();
+    }
+
+  loadGroups(){
+      this.http.get( base_url + 'api/get_all_groups?key=43730487024f808fcxxxc22424')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.groups = data;
+        // console.log(data);
+      },
+        err => { 
+
+        setTimeout(() => {
+              this.presentToast("Could not connect, please check your connection");
+          }, 3000);
+        })
+    
+  } 
+
   savePost(data) {
   if(this.lastImage){
         this.storage.get('ag_id').then(ag_id=>{
 
         // Destination URL
-        var url = base_url + "api/create_topic?key=43730487024f808fcxxxc22424" +'&topic_by=' +  this.ag_id  + '&body=' + encodeURIComponent(data.body).replace(/%20/g,'+')  + '&title=' +  encodeURIComponent(data.title).replace(/%20/g,'+')    + '&by_username=' + 'kazim';
+        var url = base_url + "api/create_topic?key=43730487024f808fcxxxc22424" +'&topic_by=' +  this.ag_id  + '&body=' + encodeURIComponent(data.body).replace(/%20/g,'+')  + '&title=' +  encodeURIComponent(data.title).replace(/%20/g,'+')  + '&group_id=' + data.group_id;
         
         // File for Upload
         var targetPath = this.pathForImage(this.lastImage);
@@ -83,7 +105,7 @@ export class CreateTopicPage {
        
         data.topic_by = this.ag_id;
 
-      this.http.get( base_url + 'api/create_topic?key=43730487024f808fcxxxc22424' + '&topic_by=' + this.ag_id  + '&body=' + data.body  + '&title=' + data.title   + '&by_username=' + 'kazim' )
+      this.http.get( base_url + 'api/create_topic?key=43730487024f808fcxxxc22424' + '&topic_by=' + this.ag_id  + '&body=' + data.body  + '&title=' + data.title   + '&group_id=' + data.group_id )
         .map(res => res.json())
         .subscribe(data => {
           console.log(data);
